@@ -1,8 +1,6 @@
 GEM
   remote: https://ruby.taobao.org/
   specs:
-    haml (4.0.7)
-      tilt
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -16,5 +14,4 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  haml
   sinatra
