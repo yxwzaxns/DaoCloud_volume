@@ -1,17 +1,13 @@
 from ruby
 
-run mkdir /app
-
-add . /app
-
-workdir /app
-
 volume /var/vo
 
-run ln -s /app /var/vo/app
+add . /var/vo
+
+workdir /var/vo
 
 expose 8080
 
 run bundle install
 
-cmd ["ruby","/app/myapp.rb"]
+cmd ["ruby","/var/vo/myapp.rb"]
