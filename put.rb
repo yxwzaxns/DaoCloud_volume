@@ -1,20 +1,18 @@
-path="."
-
-dir=Dir.open(path)
-
+path="./tmp/"
+content=Hash.new
+dir=Dir.entries(path)
 files=[]
+Dir.chdir(path)
+dir.each do |f|
+  if File.exist?(File.expand_path(f)) && File.directory?(f) != true
 
-while name = dir.read
-  next if name == '.'
-  next if name == '..'
-  files.push File.expand_path(name)
-end
-
-files.each do |f|
-  puts File.basename(f)
-  puts "----------------------------"
-  IO.foreach f do |l|
-    puts l
+    files.push File.expand_path(f)
   end
-  puts "----------------------------"
+end
+files.each do |f|
+    item=Array('')
+    IO.foreach f do |l|
+      item.push l
+    end
+    content[f]=item
 end

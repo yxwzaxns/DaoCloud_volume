@@ -5,12 +5,18 @@
     <title></title>
   </head>
   <body>
-    <h2><%= title %></h2>
+    <% if !content.empty? %>
+    <% content.each do |k,v| %>
 
-    <% content.each do |l| %>
+    <h2><%=k.to_s %></h2>
     <p>
+    <% v.each do |l| %>
+
       <%=l %>
-    </p>
+      <br>
+    <% end %>
+      </p>
+    <% end %>
     <% end %>
   </body>
 </html>

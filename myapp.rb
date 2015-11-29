@@ -11,13 +11,26 @@ module Sinatra
 end
 
 get '/' do
-  filepath="./myapp.rb"
-  title=File.expand_path(filepath)
-  file=File.new(File.expand_path(filepath))
-  content=[]
-  file.each_line do |l|
-    content.push l
+  path="/var/vo"
+  content=Hash.new
+  dir=Dir.entries(path)
+  files=[]
+  # 切换到 /var/vo volume 目录
+  Dir.chdir(path) do
+    # 查找 /var/vo 下的文件
+    dir.each do |f|
+      if File.exist?(File.expand_path(f)) && File.directory?(f) != true
+        files.push File.expand_path(f)
+      end
+    end
+    # 把所有文件内容放入变量 content
+    files.each do |f|
+        item=Array('')
+        IO.foreach f do |l|
+          item.push l
+        end
+        content[f]=item
+    end
   end
-  file.close
-  erb :index, :locals => { :title => title, :content => content}
+  erb :index, :locals => {:content => content}
 end
