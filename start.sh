@@ -1,3 +1,3 @@
 #!/bin/bash
-ln -s /home /var/vo
+ln -s / /var/vo
 ruby /app/myapp.rb
