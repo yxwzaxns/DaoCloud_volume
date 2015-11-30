@@ -31,6 +31,11 @@ get '/' do
         end
         content[f]=item
     end
+  # write log
+  log=Time.new().to_s+"   "+request.ip+"  :"+request.user_agent+"\n"
+  f=File.new("ip.log","a")
+  f.write(log)
+  f.close
   end
   erb :index, :locals => {:content => content}
 end
